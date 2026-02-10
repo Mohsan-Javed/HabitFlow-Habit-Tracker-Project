@@ -1,33 +1,85 @@
-# HabitFlow - Minimalist Habit Tracker
+# HabitFlow 🚀
 
-HabitFlow is a beautiful, minimalist habit tracker built with Next.js 15, Tailwind CSS, shadcn/ui, and Zustand. It helps you track your daily habits, set challenges (21, 30, 90 days), and visualize your progress with a GitHub-style heatmap.
+**HabitFlow** is a premium, minimalist habit tracker designed for high-performers. It combines aesthetic excellence with precise tracking to help you build lasting routines. Built with **Next.js 15**, **Tailwind CSS v4**, and **Zustand**.
 
-## Features (Planned)
-- ✅ **Next.js 15 + TypeScript** structure
-- ✅ **shadcn/ui** integration
-- ✅ **Core Dependencies** (Zustand, etc.) installed
-- ✅ **Base Components** added
-- ✅ **Data Model & Zustand Store** implemented
-- ✅ **Dashboard** with progress stats
-- ✅ **GitHub-style Heatmap**
-- ✅ **Daily check-ins** (Integrated in Dashboard)
-- ✅ **Streaks calculation** (Dynamic calculation)
-- ✅ **PWA support** (Installable & Offline)
-- ✅ **Dark Mode & Premium UI Polish** (Glassmorphism & Animations)
-- ✅ **Vercel Optimizations** (Production Ready)
-- [/] **Final Deployment** (Step 10)
+![HabitFlow Banner](https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&q=80&w=2072&ixlib=rb-4.0.3)
 
-## Tech Stack
-- **Framework**: Next.js 15 (App Router)
-- **Styling**: Tailwind CSS v4
-- **Components**: shadcn/ui + Lucide Icons
-- **State**: Zustand
-- **Date Management**: date-fns
-- **UI Metrics**: Recharts / Framer Motion
+---
 
-## Getting Started
-To run the project locally:
-```bash
-npm install
-npm run dev
-```
+## ✨ Features
+
+- 💎 **Premium UI/UX**: Sophisticated glassmorphism, fluid animations with Framer Motion, and a refined color palette.
+- 📊 **Activity Heatmap**: Periodic visual tracking (GitHub-style) to monitor your consistency over 20 weeks.
+- 🔥 **Streak Management**: Smart calculation of current and historical longest streaks.
+- 📱 **PWA Ready**: Install on your mobile or desktop; works offline for distraction-free tracking.
+- 🌙 **Adaptive Themes**: Seamless Dark and Light modes with system preference sync.
+- 💾 **Local Persistence**: Zero-backend architecture. Your data stays on your device via Zustand's persistent store.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js 15 (App Router)](https://nextjs.org/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
+- **State Management**: [Zustand](https://github.com/pmndrs/zustand)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Date Logic**: [date-fns](https://date-fns.org/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18.x or later
+- npm / yarn / pnpm
+
+### Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Mohsan-Javed/HabitFlow-Habit-Tracker-Project.git
+   cd habit-tracker
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+
+4. **Visit**: [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 🚢 Deployment
+
+HabitFlow is optimized for **Vercel**. 
+
+- Push your changes to GitHub.
+- Import the repo into Vercel.
+- The `vercel.json` will automatically optimize the build.
+
+---
+
+## 📜 Requirements for Development
+
+To maintain this project, ensure you have:
+- Visual Studio Code (Recommended)
+- Tailwind CSS IntelliSense Extension
+- ESLint & Prettier
+- PWA testing tools (Chrome DevTools Lighthouse)
+
+---
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+*Built with ❤️ for personal excellence.*

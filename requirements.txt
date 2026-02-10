@@ -1,0 +1,23 @@
+HabitFlow Project Requirements
+
+Core Engine:
+- Next.js >= 15.0.0
+- React >= 19.0.0
+- Tailwind CSS >= 4.0.0
+- TypeScript >= 5.0.0
+
+State & Logic:
+- Zustand (with persistence middleware)
+- date-fns (for date manipulation)
+- lucide-react (for iconography)
+
+UI & User Experience:
+- shadcn/ui components (Select, Button, Card, Dialog, Toaster, etc.)
+- next-themes (for dark mode management)
+- framer-motion (for micro-animations)
+- clsx / tailwind-merge (for dynamic styling)
+
+Deployment & PWA:
+- Vercel CLI (optional for manual deploy)
+- web-vitals (optimization tracking)
+- Service Worker & manifest.json
