@@ -5,6 +5,8 @@ HabitFlow is a beautiful, minimalist habit tracker built with Next.js 15, Tailwi
 ## Features (Planned)
 - ✅ **Next.js 15 + TypeScript** structure
 - ✅ **shadcn/ui** integration
+- ✅ **Core Dependencies** (Zustand, etc.) installed
+- ✅ **Base Components** added
 - ⏳ **Dashboard** with progress stats
 - ⏳ **Daily check-ins**
 - ⏳ **GitHub-style Heatmap**
