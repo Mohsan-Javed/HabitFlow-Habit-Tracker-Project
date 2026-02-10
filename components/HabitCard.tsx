@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
+import { Heatmap } from "./Heatmap";
+import { Separator } from "@/components/ui/separator";
 
 interface HabitCardProps {
     habit: Habit;
@@ -89,6 +91,13 @@ export function HabitCard({ habit }: HabitCardProps) {
                     <p className="text-[10px] text-right text-muted-foreground">
                         {habit.completedDates.length} / {habit.duration} days completed
                     </p>
+                </div>
+
+                <div className="mt-6 border-t pt-4">
+                    <h4 className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground mb-3">
+                        Activity
+                    </h4>
+                    <Heatmap completedDates={habit.completedDates} />
                 </div>
             </CardContent>
         </Card>
