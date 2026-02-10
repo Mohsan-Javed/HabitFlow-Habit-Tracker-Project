@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { Heatmap } from "./Heatmap";
 import { Separator } from "@/components/ui/separator";
+import { calculateStreak } from "@/lib/streak";
 
 interface HabitCardProps {
     habit: Habit;
@@ -22,6 +23,8 @@ export function HabitCard({ habit }: HabitCardProps) {
 
     const today = format(new Date(), "yyyy-MM-dd");
     const isDoneToday = habit.completedDates.includes(today);
+
+    const { currentStreak } = calculateStreak(habit.completedDates);
 
     const progress = Math.min(
         Math.round((habit.completedDates.length / habit.duration) * 100),
@@ -58,8 +61,8 @@ export function HabitCard({ habit }: HabitCardProps) {
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
                         <Badge variant="secondary" className="gap-1">
-                            <Zap className="h-3 w-3 fill-orange-500 text-orange-500" />
-                            <span>Streak coming soon</span>
+                            <Zap className={`h-3 w-3 ${currentStreak > 0 ? "fill-orange-500 text-orange-500" : "text-muted-foreground"}`} />
+                            <span>{currentStreak} Day Streak</span>
                         </Badge>
                         <Badge variant="outline" className="gap-1">
                             <CalendarIcon className="h-3 w-3" />

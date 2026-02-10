@@ -3,6 +3,7 @@
 import { useHabitStore } from "@/store/useHabitStore";
 import { CheckCircle2, Flame, Target, TrendingUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { calculateStreak } from "@/lib/streak";
 
 export function StatsHeader() {
     const habits = useHabitStore((state) => state.habits);
@@ -16,6 +17,10 @@ export function StatsHeader() {
     const totalDuration = habits.reduce((acc, h) => acc + h.duration, 0);
     const averageCompletion = totalDuration > 0
         ? Math.round((totalCompletions / totalDuration) * 100)
+        : 0;
+
+    const longestStreak = habits.length > 0
+        ? Math.max(...habits.map(h => calculateStreak(h.completedDates).longestStreak))
         : 0;
 
     return (
@@ -58,7 +63,7 @@ export function StatsHeader() {
                     <Flame className="h-4 w-4 text-orange-500" />
                 </CardHeader>
                 <CardContent>
-                    <div className="text-2xl font-bold">5 days</div>
+                    <div className="text-2xl font-bold">{longestStreak} days</div>
                     <p className="text-xs text-muted-foreground">Personal best</p>
                 </CardContent>
             </Card>
