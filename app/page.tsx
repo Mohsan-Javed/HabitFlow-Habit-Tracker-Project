@@ -5,33 +5,55 @@ import { AddHabit } from "@/components/AddHabit";
 import { HabitCard } from "@/components/HabitCard";
 import { StatsHeader } from "@/components/StatsHeader";
 import { Separator } from "@/components/ui/separator";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const habits = useHabitStore((state) => state.habits);
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
-      <main className="container mx-auto max-w-5xl px-4 py-8 md:py-12">
-        <header className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+    <div className="min-h-screen bg-background transition-colors duration-500 relative overflow-hidden">
+      {/* Premium Background Pattern */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.03] dark:opacity-[0.05]"
+        style={{ backgroundImage: `radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)`, backgroundSize: '32px 32px' }}>
+      </div>
+
+      <main className="container mx-auto max-w-5xl px-4 py-8 md:py-16 relative z-10">
+        <motion.header
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-center"
+        >
           <div>
-            <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
+            <h1 className="text-5xl font-black tracking-tight lg:text-6xl text-gradient">
               HabitFlow
             </h1>
-            <p className="mt-2 text-muted-foreground">
-              Small steps, giant leaps. Track your journey to excellence.
+            <p className="mt-3 text-lg text-muted-foreground/80 font-medium">
+              Precision tracking for personal excellence.
             </p>
           </div>
-          <AddHabit />
-        </header>
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <AddHabit />
+          </div>
+        </motion.header>
 
-        <StatsHeader />
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.1 }}
+        >
+          <StatsHeader />
+        </motion.div>
 
-        <div className="mt-12">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold tracking-tight">Your Habits</h2>
+        <div className="mt-16">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl font-extrabold tracking-tight text-gradient">
+              Your Challenges
+            </h2>
             {habits.length > 0 && (
-              <span className="text-sm text-muted-foreground">
-                {habits.length} Active Challenges
+              <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
+                {habits.length} Active
               </span>
             )}
           </div>

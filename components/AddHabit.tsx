@@ -17,12 +17,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 import { toast } from "sonner";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function AddHabit() {
     const [open, setOpen] = useState(false);
@@ -48,61 +50,65 @@ export function AddHabit() {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button className="rounded-full shadow-lg transition-all hover:scale-105">
-                    <Plus className="mr-2 h-4 w-4" /> Add Habit
+                <Button className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-6 shadow-lg shadow-primary/20 transition-all hover:scale-105 active:scale-95">
+                    <Plus className="mr-2 h-5 w-5 stroke-[3px]" /> New Challenge
                 </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
-                <form onSubmit={handleSubmit}>
-                    <DialogHeader>
-                        <DialogTitle>Add New Habit</DialogTitle>
-                        <DialogDescription>
-                            Start a new habit challenge and track your progress daily.
-                        </DialogDescription>
-                    </DialogHeader>
-                    <div className="grid gap-4 py-4">
-                        <div className="grid gap-2">
-                            <Label htmlFor="name">Habit Name</Label>
-                            <Input
-                                id="name"
-                                placeholder="e.g., Read for 30 mins"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                        </div>
-                        <div className="grid gap-2">
-                            <Label htmlFor="description">Description (Optional)</Label>
-                            <Input
-                                id="description"
-                                placeholder="Why do you want to do this?"
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                            />
-                        </div>
-                        <div className="grid gap-2">
-                            <Label>Duration</Label>
-                            <DropdownMenu>
-                                <DropdownMenuTrigger asChild>
-                                    <Button variant="outline" className="w-full justify-start">
-                                        {duration} days challenge
-                                    </Button>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent className="w-[375px]">
-                                    <DropdownMenuItem onClick={() => setDuration(21)}>
-                                        21 days challenge (Build momentum)
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem onClick={() => setDuration(30)}>
-                                        30 days challenge (Standard)
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem onClick={() => setDuration(90)}>
-                                        90 days challenge (Lifestyle change)
-                                    </DropdownMenuItem>
-                                </DropdownMenuContent>
-                            </DropdownMenu>
-                        </div>
+            <DialogContent className="sm:max-w-[425px] glass border-white/20 shadow-2xl">
+                <DialogHeader>
+                    <DialogTitle className="text-2xl font-black tracking-tight text-gradient">Start New Habit</DialogTitle>
+                    <DialogDescription className="font-medium text-muted-foreground/70 italic">
+                        The journey of a thousand miles begins with a single step.
+                    </DialogDescription>
+                </DialogHeader>
+                <form onSubmit={handleSubmit} className="space-y-6 pt-4">
+                    <div className="space-y-2">
+                        <Label htmlFor="name" className="text-xs font-black uppercase tracking-widest text-muted-foreground/60">
+                            What is your goal?
+                        </Label>
+                        <Input
+                            id="name"
+                            placeholder="e.g. Morning Meditation"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                            className="bg-background/50 border-white/10 focus:border-primary/50 transition-colors font-medium"
+                        />
                     </div>
-                    <DialogFooter>
-                        <Button type="submit">Create Habit</Button>
+                    <div className="space-y-2">
+                        <Label htmlFor="description" className="text-xs font-black uppercase tracking-widest text-muted-foreground/60">
+                            Description (Optional)
+                        </Label>
+                        <Input
+                            id="description"
+                            placeholder="Small details help..."
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            className="bg-background/50 border-white/10 focus:border-primary/50 transition-colors font-medium"
+                        />
+                    </div>
+                    <div className="space-y-2">
+                        <Label className="text-xs font-black uppercase tracking-widest text-muted-foreground/60">
+                            Challenge Duration
+                        </Label>
+                        <Select
+                            value={duration.toString()}
+                            onValueChange={(v: string) => setDuration(Number(v) as HabitDuration)}
+                        >
+                            <SelectTrigger className="bg-background/50 border-white/10 focus:border-primary/50 font-bold">
+                                <SelectValue placeholder="Select duration" />
+                            </SelectTrigger>
+                            <SelectContent className="glass border-white/10">
+                                <SelectItem value="21" className="font-bold focus:bg-primary/10">21 Days (Sprint)</SelectItem>
+                                <SelectItem value="30" className="font-bold focus:bg-primary/10">30 Days (Growth)</SelectItem>
+                                <SelectItem value="90" className="font-bold focus:bg-primary/10">90 Days (Mastery)</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+                    <DialogFooter className="pt-4">
+                        <Button type="submit" className="w-full rounded-xl bg-primary font-black uppercase tracking-widest shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
+                            Ignite Habit
+                        </Button>
                     </DialogFooter>
                 </form>
             </DialogContent>

@@ -4,6 +4,7 @@ import { useHabitStore } from "@/store/useHabitStore";
 import { CheckCircle2, Flame, Target, TrendingUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { calculateStreak } from "@/lib/streak";
+import { motion } from "framer-motion";
 
 export function StatsHeader() {
     const habits = useHabitStore((state) => state.habits);
@@ -23,50 +24,38 @@ export function StatsHeader() {
         ? Math.max(...habits.map(h => calculateStreak(h.completedDates).longestStreak))
         : 0;
 
+    const statCards = [
+        { label: "Active Challenges", value: totalHabits, icon: Target, color: "text-blue-500", detail: "Total habits tracked" },
+        { label: "Today's Progress", value: `${completedToday}/${totalHabits}`, icon: CheckCircle2, color: "text-green-500", detail: "Check-ins for today" },
+        { label: "Avg. Completion", value: `${averageCompletion}%`, icon: TrendingUp, color: "text-purple-500", detail: "Overall success rate" },
+        { label: "Personal Best", value: `${longestStreak} Days`, icon: Flame, color: "text-orange-500", detail: "Longest streak" },
+    ];
+
     return (
-        <div className="grid gap-4 md:grid-cols-4">
-            <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Total Habits</CardTitle>
-                    <Target className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                    <div className="text-2xl font-bold">{totalHabits}</div>
-                    <p className="text-xs text-muted-foreground">Active challenges</p>
-                </CardContent>
-            </Card>
-            <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Completed Today</CardTitle>
-                    <CheckCircle2 className="h-4 w-4 text-green-500" />
-                </CardHeader>
-                <CardContent>
-                    <div className="text-2xl font-bold">{completedToday}</div>
-                    <p className="text-xs text-muted-foreground">
-                        {totalHabits > 0 ? Math.round((completedToday / totalHabits) * 100) : 0}% success rate
-                    </p>
-                </CardContent>
-            </Card>
-            <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Avg. Completion</CardTitle>
-                    <TrendingUp className="h-4 w-4 text-blue-500" />
-                </CardHeader>
-                <CardContent>
-                    <div className="text-2xl font-bold">{averageCompletion}%</div>
-                    <p className="text-xs text-muted-foreground">Across all habits</p>
-                </CardContent>
-            </Card>
-            <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Longest Streak</CardTitle>
-                    <Flame className="h-4 w-4 text-orange-500" />
-                </CardHeader>
-                <CardContent>
-                    <div className="text-2xl font-bold">{longestStreak} days</div>
-                    <p className="text-xs text-muted-foreground">Personal best</p>
-                </CardContent>
-            </Card>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {statCards.map((stat, index) => (
+                <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 + 0.2 }}
+                >
+                    <Card className="glass-card border-white/20 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300">
+                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                            <CardTitle className="text-xs font-black uppercase tracking-widest text-muted-foreground/60">
+                                {stat.label}
+                            </CardTitle>
+                            <stat.icon className={`h-5 w-5 ${stat.color} drop-shadow-sm`} />
+                        </CardHeader>
+                        <CardContent>
+                            <div className="text-3xl font-black tracking-tight">{stat.value}</div>
+                            <p className="mt-1 text-[10px] font-bold text-muted-foreground/50 uppercase tracking-tighter italic">
+                                {stat.detail}
+                            </p>
+                        </CardContent>
+                    </Card>
+                </motion.div>
+            ))}
         </div>
     );
 }
