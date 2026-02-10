@@ -8,8 +8,10 @@
 
 ## ✨ Features
 
-- 💎 **Premium UI/UX**: Sophisticated glassmorphism, fluid animations with Framer Motion, and a refined color palette.
-- 📊 **Activity Heatmap**: Periodic visual tracking (GitHub-style) to monitor your consistency over 20 weeks.
+- 💎 **Premium UI/UX**: Sophisticated glassmorphism, fluid animations, and a refined color palette.
+- 📋 **Consolidated Tracker**: All your habits in one sleek, efficient list view.
+- ➕ **Bulk Add Support**: Ignite multiple challenges simultaneously with dynamic row entries.
+- 📊 **Activity Heatmap**: Periodic visual tracking (GitHub-style) to monitor your consistency.
 - 🔥 **Streak Management**: Smart calculation of current and historical longest streaks.
 - 📱 **PWA Ready**: Install on your mobile or desktop; works offline for distraction-free tracking.
 - 🌙 **Adaptive Themes**: Seamless Dark and Light modes with system preference sync.

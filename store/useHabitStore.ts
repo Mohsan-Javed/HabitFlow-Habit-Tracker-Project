@@ -9,6 +9,7 @@ interface HabitState {
     toggleHabitDate: (id: string, date: string) => void;
     deleteHabit: (id: string) => void;
     updateHabit: (id: string, updates: Partial<Habit>) => void;
+    bulkAddHabits: (habits: Array<{ name: string; duration: HabitDuration; description?: string }>) => void;
 }
 
 export const useHabitStore = create<HabitState>()(
@@ -54,6 +55,22 @@ export const useHabitStore = create<HabitState>()(
                     habits: state.habits.map((habit) =>
                         habit.id === id ? { ...habit, ...updates } : habit
                     ),
+                }));
+            },
+
+            bulkAddHabits: (newHabits) => {
+                set((state) => ({
+                    habits: [
+                        ...state.habits,
+                        ...newHabits.map((h) => ({
+                            id: crypto.randomUUID(),
+                            name: h.name,
+                            description: h.description || "",
+                            duration: h.duration,
+                            completedDates: [],
+                            createdAt: new Date().toISOString(),
+                        })),
+                    ],
                 }));
             },
         }),
