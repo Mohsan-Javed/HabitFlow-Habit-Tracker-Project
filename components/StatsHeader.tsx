@@ -1,13 +1,30 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useHabitStore } from "@/store/useHabitStore";
 import { CheckCircle2, Flame, Target, TrendingUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { calculateStreak } from "@/lib/streak";
 import { motion } from "framer-motion";
+import { Habit } from "@/types/habit";
 
 export function StatsHeader() {
+    const [mounted, setMounted] = useState(false);
     const habits = useHabitStore((state) => state.habits);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) {
+        return (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                {[1, 2, 3, 4].map((i) => (
+                    <div key={i} className="h-32 rounded-3xl bg-white/5 animate-pulse border border-white/10" />
+                ))}
+            </div>
+        );
+    }
 
     const totalHabits = habits.length;
     const completedToday = habits.filter((h) =>

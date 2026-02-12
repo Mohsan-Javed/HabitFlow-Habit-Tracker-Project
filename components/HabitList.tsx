@@ -1,12 +1,20 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useHabitStore } from "@/store/useHabitStore";
 import { HabitRow } from "./HabitRow";
 import { motion, AnimatePresence } from "framer-motion";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 export function HabitList() {
+    const [mounted, setMounted] = useState(false);
     const habits = useHabitStore((state) => state.habits);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return null;
 
     if (habits.length === 0) {
         return (
